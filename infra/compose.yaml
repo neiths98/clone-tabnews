@@ -2,7 +2,7 @@ services:
   postgres:
     image: postgres:16.0-alpine3.18
     env_file:
-      - ../.env
+      - ../.env.development
     ports:
       # <host>:<container> -> outside:inside
       - 5432:5432
