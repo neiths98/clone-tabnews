@@ -10,7 +10,7 @@ function getSSLValues() {
   return process.env.NODE_ENV === 'production'
 }
 
-async function query(queryObject) {
+async function getNewClient() {
   const client = new Client({
     user: process.env.POSTGRES_USER,
     host: process.env.POSTGRES_HOST,
@@ -20,8 +20,14 @@ async function query(queryObject) {
     ssl: getSSLValues(),
   })
 
+  await client.connect()
+  return client
+}
+
+async function query(queryObject) {
+  let client
   try {
-    await client.connect()
+    client = await getNewClient()
     const result = await client.query(queryObject)
     return result
   } catch (error) {
@@ -34,4 +40,5 @@ async function query(queryObject) {
 
 export default {
   query,
+  getNewClient
 }
