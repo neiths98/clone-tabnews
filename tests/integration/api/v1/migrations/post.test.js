@@ -1,10 +1,11 @@
 import database from 'infra/database'
+import orchestrator from 'tests/orchestrator'
 
-beforeAll(cleanDatabase)
-
-async function cleanDatabase() {
+beforeAll(async () => {
+  await orchestrator.waitForAllServices()
   await database.query('DROP SCHEMA public CASCADE; CREATE SCHEMA public;')
-}
+})
+
 
 test('POST to api/v1/migrations', async () => {
   // 1 Scenario - Run migrations for the first time
