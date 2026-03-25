@@ -11,9 +11,12 @@ async function status(req, res) {
   })
   const databaseConnectionsValue = databaseConnectionsResult.rows[0].count
 
-  const databaseMaxConnectionsResult = await database.query(`SHOW max_connections;`)
-  const databaseMaxConnectionsValue = parseInt(databaseMaxConnectionsResult.rows[0].max_connections)
-
+  const databaseMaxConnectionsResult = await database.query(
+    `SHOW max_connections;`,
+  )
+  const databaseMaxConnectionsValue = parseInt(
+    databaseMaxConnectionsResult.rows[0].max_connections,
+  )
 
   res.status(200).json({
     status: 'ok',
@@ -23,8 +26,8 @@ async function status(req, res) {
         version: databaseVersionValue,
         max_connections: databaseMaxConnectionsValue,
         opened_connections: databaseConnectionsValue,
-      }
-    }
+      },
+    },
   })
 }
 

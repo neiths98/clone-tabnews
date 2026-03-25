@@ -3,7 +3,7 @@ import { Client } from 'pg'
 function getSSLValues() {
   if (process.env.POSTGRES_CA) {
     return {
-      ca: process.env.POSTGRES_CA
+      ca: process.env.POSTGRES_CA,
     }
   }
 
@@ -40,5 +40,5 @@ async function query(queryObject) {
 
 export default {
   query,
-  getNewClient
+  getNewClient,
 }
