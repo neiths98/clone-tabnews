@@ -15,11 +15,11 @@ async function migrations(req, res) {
     const defaultConfig = {
       dbClient: dbClient,
       databaseUrl: process.env.DATA_TEST,
-      dir: join("infra", "migrations"),
+      dir: join('infra', 'migrations'),
       dryRun: true,
-      direction: "up",
+      direction: 'up',
       verbose: true,
-      migrationsTable: "pgmigrations"
+      migrationsTable: 'pgmigrations',
     }
 
     if (req.method === 'GET') {
@@ -30,7 +30,7 @@ async function migrations(req, res) {
     if (req.method === 'POST') {
       const migratedMigrations = await migrationsRunner({
         ...defaultConfig,
-        dryRun: false
+        dryRun: false,
       })
 
       if (migratedMigrations.length > 0) {
@@ -39,7 +39,7 @@ async function migrations(req, res) {
 
       return res.status(200).json(migratedMigrations)
     }
-  } catch(error) {
+  } catch (error) {
     console.error(error)
     throw error
   } finally {
