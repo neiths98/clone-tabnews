@@ -1,6 +1,6 @@
 import database from 'infra/database'
 import migrationsRunner from 'node-pg-migrate'
-import { join } from 'node:path'
+import { resolve } from 'node:path'
 
 async function migrations(req, res) {
   const allowedMethods = ['GET', 'POST']
@@ -15,7 +15,7 @@ async function migrations(req, res) {
     const defaultConfig = {
       dbClient: dbClient,
       databaseUrl: process.env.DATA_TEST,
-      dir: join('infra', 'migrations'),
+      dir: resolve('infra', 'migrations'),
       dryRun: true,
       direction: 'up',
       verbose: true,
